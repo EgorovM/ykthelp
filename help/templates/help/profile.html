@@ -1,0 +1,183 @@
+{% load staticfiles %}
+
+<html>
+        <head>
+            <title>Онлайн сообщество взаимопомощи в г.Якутск</title>
+            <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+            <link rel="stylesheet" href="{% static 'help/css/bootstrap.min.css' %}">
+            <link href="{% static 'help/css/sticky-footer.css' %}" rel="stylesheet">
+
+            <script src="{% static 'help/js/jquery-3.1.1.min.js' %}"></script>
+            <script src="{% static 'help/js/bootstrap.min.js' %}"></script>
+
+            <style>
+                    p1{
+                        text-decoration: underline;
+                    }
+
+                     h1 a {
+                        font-family: 'Lobster';
+                        color: white;
+                    }
+
+                    .page-header {
+                        background-color: #FCA205;
+                        margin-top: 0;
+                        padding: 20px 20px 20px 40px;
+                    }
+
+                    .page-end {       
+                        margin-top: 0;
+                        padding: 20px 20px 20px 40px;
+                        background-color: gray;
+                        padding-right: 15px;
+                    }
+
+                    .author {
+                        color: white;
+                        font-family: 'Lobster';
+                    }
+                    body {
+                        background: #F5F5F5;
+                    }
+                    .well {
+                        background: white;
+                    }
+
+                    .page-header a:hover {
+                        color:white;
+                        text-decoration: none;
+                    }
+                    .profile_window{
+                        margin-left:30px;
+                    }
+                    .buttons_right{
+                        text-align: right;
+                    }
+                    .buttons_left{
+                        text-align: left;
+                    }
+                </style>
+
+        </head>
+
+    <body>
+
+        <div class = "page-header">
+            <h1><a href="/">Онлайн сообщество взаимопомощи в г.Якутск</a></h1>
+            {% if is_auth %}
+                    <div class="form-row">
+                        <row><a href= "/editprofile/{{user.profile.id}}">Редактировать профиль</a></row>
+                        <row>|</row>
+                        <row><a href= "/logout/">Выйти</a></row>
+                        
+                        
+                        
+                        <div class = "col-lg-9">
+                            
+                        </div>
+
+                    </div>
+
+            {% else %}  
+                <div class = "col-md-offset-9">
+                    <row><a href="/login/">Войти</a></row>
+                    <row>|</row>
+                    <row><a href="/registrations/">Зарегистрироватся</a></row>
+                </div>
+            {% endif %}      
+
+        </div>
+
+        <div class = "row">
+            <div class="col-xs-6 col-md-3 profile_window">
+
+                    <div class = "well">
+
+                            {% if user.profile.image %}    
+                                <img src = "{{user.profile.image.url}}" class = "img-rounded"> 
+                            {% else %}
+                                <img src = "/media/images/empty_image.png" class = "img-rounded">
+                            {% endif %}
+
+                            <div class="form-group">
+                                <h2>{{user.first_name}}
+                                {{user.last_name}}</h2>
+                            </div>
+
+                        {% if user.profile.address %}
+                            <div class="form-group">
+                                <p1> Телефон </p1>
+                                <p>{{user.profile.telephone}}</p>
+                            </div>
+                        {% endif %}
+
+                        {% if user.profile.address %}
+                            <div class="form-group">
+                                <p1> Адрес </p1>
+                                <p> {{user.profile.address}}</p>
+                            </div>      
+                        {% endif %}
+                    </div>     
+            </div>
+            <div class = "row">
+                <div class = "col-md-6">
+                    {% for order in latest_order_list %}
+                        <div class = "col-md-12 well">
+                            <p>Опубликовано: {{ order.pub_date }}</p>
+                            <p>Просьба: {{order.problem}}</p>
+                            <p>Телефон: {{order.telephone}}</p>
+                            {% if order.status == True %}
+                                <p>Статус: Активно</p>
+                            {% else %}
+                                <p>Статус: Уже не активно</p>
+                            {% endif %}   
+                           
+                            <div class = "form-row buttons_right">                                              
+                                <div class="col-md-offset-7">
+                                    {% if views_profile != False and order.profile == views_profile %}
+                                    <row>                                       
+                                        <a href="/order/{{order.id}}"><button type="button" class="btn btn-danger btn-sm">Редактировать</button></a>
+                                        <a href="/{{ order.id }}/"><button type="button" class="btn btn-primary btn-sm">Подробнее</button></a>                          
+                                    </row>
+                                    {% else %}
+                                        <a href="/{{ order.id }}/"><button type="button" class="btn btn-primary btn-sm">Подробнее</button></a>
+                                                                      
+                                    {% endif %}    
+                                </div>
+                            </div>
+
+                        </div>
+                   
+                    {% endfor %}
+                
+                    <nav aria-label="...">
+                      <ul class="pager">
+                        {% if latest_order_list.has_next %}
+                              <li class="next"><a href="/?page={{latest_order_list.next_page_number}}">Следующая страница <span aria-hidden="true">&rarr;</span></a></li>
+                        {% endif %} 
+                        
+                        {% if latest_order_list.has_previous %}
+                            <li class="previous"><a href="/?page={{latest_order_list.previous_page_number}}"><span aria-hidden="true">&larr;</span> Предыдущая страница</a></li>
+                        {% endif %}
+                   
+                      </ul>
+                    </nav>
+            </div>
+        </div>    
+        <hr class=half-rule>
+        <p>
+            <footer class="bs-docs-footer">  
+                <ul class=bs-docs-footer-links> 
+                    <div class="container">
+                        <div class = "row">
+                            <div class = "col-md-offset-4">
+                                <p class="text-muted">© </p>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </footer>
+        </p>
+    </html>
+</body>

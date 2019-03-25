@@ -1,0 +1,62 @@
+{% load staticfiles %}
+
+<! DOCTYPE html>
+<html>
+        <head>
+            <meta charset= "utf-8">
+            <title>Онлайн сообщество взаимопомощи</title>
+            <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+            <link rel="stylesheet" href="{% static 'help/css/bootstrap.min.css' %}">
+            <link href="{% static 'help/css/sticky-footer.css' %}" rel="stylesheet">
+            
+            <script src="{% static 'help/js/modal.js' %}"></script>
+            <script src="{% static 'help/js/jquery-3.1.1.min.js' %}"></script>
+            <script src="{% static 'help/js/bootstrap.min.js' %}"></script>
+
+            <style>
+                    h1 a {
+                        font-family: 'Lobster';
+                        color: white;                       
+                    }
+
+                    .page-header {
+                        background-color: peru;
+                        margin-top: 0;
+                        padding: 20px 20px 20px 40px;
+                    }
+
+                    .page-end {       
+                        margin-top: 0;
+                        padding: 20px 20px 20px 40px;
+                        background-color: #777;
+                        padding-right: 15px;
+                    }
+
+                    .author {
+                        color: white;
+                        font-family: 'Lobster';
+                    }
+
+                    .page-header a:hover {
+                        color: white;
+                        text-decoration: none;
+                    }
+                    .page-header row a:hover {
+                        color:white;
+                        text-decoration: none;
+                    }
+                    body {
+                        background: #F5F5F5;
+                    }
+                    .well {
+                        background: white;
+                    }
+                    .more {
+                        padding-left: 115px;
+                    }
+            </style>
+
+        </head>
+
+    <body>
+        

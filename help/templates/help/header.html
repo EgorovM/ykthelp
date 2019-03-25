@@ -1,0 +1,52 @@
+{% load staticfiles %}
+
+<html>
+        <head>
+            <title>Онлайн сообщество помощи</title>
+            <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+            <link rel="stylesheet" href="{% static 'help/css/bootstrap.min.css' %}">
+
+            <script src="{% static 'help/js/jquery-3.1.1.min.js' %}"></script>
+            <script src="{% static 'help/js/bootstrap.min.js' %}"></script>
+
+            <style>
+                     h1 a {
+                        font-family: 'Lobster';
+                        color: white;
+                    }
+
+                    .page-header {
+                        background-color: #FCA205;
+                        margin-top: 0;
+                        padding: 20px 20px 20px 40px;
+                    }
+
+                    .page-end {       
+                        margin-top: 0;
+                        padding: 20px 20px 20px 40px;
+                        background-color: gray;
+                        padding-right: 15px;
+                    }
+
+                    .author {
+                        color: white;
+                        font-family: 'Lobster';
+                    }
+
+                    .end {
+                        padding-left: 525px;
+                        font-family: 'Lobster';
+                    }
+                    .button {
+                        padding-left: 125px;
+                    }
+                </style>
+
+        </head>
+
+    <body>
+
+        <div class = "page-header">
+                <h1><a href="/">Онлайн сообщество помощи в г.Якутск</a></h1>
+                <p><a href="/login/"><input name = "register" type = submit" value = "Зарегестрироватся"></a></p>
+        </div>
